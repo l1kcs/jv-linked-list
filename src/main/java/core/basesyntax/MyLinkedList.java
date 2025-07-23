@@ -62,11 +62,14 @@ public class MyLinkedList<T> implements MyLinkedListInterface<T> {
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
         }
-        newNode.prev = currentNode.prev;
-        newNode.prev.next = newNode;
-        newNode.next = currentNode;
-        currentNode.prev = newNode;
 
+        Node<T> prevNode = currentNode.prev;
+        newNode.prev = prevNode;
+        newNode.next = currentNode;
+        if (prevNode != null) {
+            prevNode.next = newNode;
+        }
+        currentNode.prev = newNode;
         size++;
     }
 
